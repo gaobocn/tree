@@ -35,8 +35,8 @@ def dfsTree(curPath, prefix):
 def tree(path):
     print(path)
     dirN, fileN = dfsTree(path, "")
-    print("\n")
-    print(str(dirN) + " directories, " + str(fileN) + " files")
+    print()
+    print(str(dirN) + (" directories, " if dirN != 1 else " directorie, ") + str(fileN) + (" files" if fileN != 1 else " files"))
 
 
 if __name__ == '__main__':
