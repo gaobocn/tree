@@ -1,19 +1,28 @@
 #!/usr/bin/env python3
 import sys
 import os
-import re
+import string
+
+def func(x):
+    x = x.lower()
+    if x[0] in string.ascii_lowercase:
+        return x.lower()
+    else:
+        for (i, key) in enumerate(x):
+            if key in string.ascii_lowercase:
+                return x[i:]
 
 # Recursive function
 def dfsTree(curPath, prefix):
     files = [x for x in os.listdir(curPath) if x[0] != '.']
+    files = sorted(files, key=func)
     dirN, fileN = 0, 0
     for i, fname in enumerate(files):
         if i < len(files) - 1:
-            print(prefix + "├── " + str(fname))
-            subdirPrefix = "│   "
+            curPrefix, subdirPrefix = "├── ", "│   "
         else:
-            print(prefix + "└── " + str(fname))
-            subdirPrefix = "    "
+            curPrefix, subdirPrefix = "└── ", "    "
+        print(prefix + curPrefix + fname)
         if os.path.isfile(os.path.join(curPath, fname)):
             fileN += 1
         else:
@@ -23,10 +32,10 @@ def dfsTree(curPath, prefix):
     return dirN, fileN
 
 def tree(path):
-	print(path)
-	dirN, fileN = dfsTree(path, "")
-	print("\n")
-	print(str(dirN) + " directories, " + str(fileN) + " files\n")
+    print(path)
+    dirN, fileN = dfsTree(path, "")
+    print("\n")
+    print(str(dirN) + " directories, " + str(fileN) + " files\n")
 
 
 if __name__ == '__main__':
