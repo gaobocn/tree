@@ -3,11 +3,13 @@ import sys
 import os
 import string
 
+intset = set('1234567890')
+
 
 def func(x):
     x = x.lower()
     for (i, key) in enumerate(x):
-        if key in string.ascii_lowercase:
+        if key in string.ascii_lowercase or key in intset:
             return x[i:]
 
 
