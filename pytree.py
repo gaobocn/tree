@@ -3,16 +3,14 @@ import sys
 import os
 import string
 
+
 def func(x):
     x = x.lower()
-    if x[0] in string.ascii_lowercase:
-        return x.lower()
-    else:
-        for (i, key) in enumerate(x):
-            if key in string.ascii_lowercase:
-                return x[i:]
+    for (i, key) in enumerate(x):
+        if key in string.ascii_lowercase:
+            return x[i:]
 
-# Recursive function
+
 def dfsTree(curPath, prefix):
     files = [x for x in os.listdir(curPath) if x[0] != '.']
     files = sorted(files, key=func)
@@ -30,6 +28,7 @@ def dfsTree(curPath, prefix):
             tdirN, tfileN = dfsTree(os.path.join(curPath, fname), prefix + subdirPrefix)
             dirN, fileN = dirN + tdirN, fileN + tfileN
     return dirN, fileN
+
 
 def tree(path):
     print(path)
